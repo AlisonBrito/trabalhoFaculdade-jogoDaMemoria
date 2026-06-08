@@ -36,7 +36,9 @@ int main()
                 for (int j = 0; j < 4; j++)
                 {
                     matrizGabarito[i][j] = matrizPrincipal[i][j];
+                    // cout << matrizGabarito[i][j] << "\t";
                 }
+                cout << "\n";
             }
             break;
 
@@ -46,7 +48,9 @@ int main()
                 for (int j = 0; j < 4; j++)
                 {
                     matrizGabarito[i][j] = matrizPrincipal[j][i];
+                    // cout << matrizGabarito[i][j] << "\t";
                 }
+                cout << "\n";
             }
             break;
 
@@ -56,7 +60,9 @@ int main()
                 for (int j = 0; j < 4; j++)
                 {
                     matrizGabarito[i][j] = matrizPrincipal[k][j];
+                    // cout << matrizGabarito[i][j] << "\t";
                 }
+                cout << "\n";
             }
             break;
 
@@ -66,7 +72,9 @@ int main()
                 for (int j = 0, k = 3; j < 4; j++, k--)
                 {
                     matrizGabarito[i][j] = matrizPrincipal[i][k];
+                    // cout << matrizGabarito[i][j] << "\t";
                 }
+                cout << "\n";
             }
             break;
         }
@@ -98,8 +106,8 @@ int main()
             }
 
             // Leitura das coordenadas escolhidas pelo jogador
-            cout << "\nAdvinhe as pecas";
-            cout << "\nPrimeira peca\n";
+            cout << "\nAdvinhe os numeros atraves da coordenadas";
+            cout << "\nPrimeira numero\n";
             cout << "Linha: ";
             cin >> linha1;
             linha1--;
@@ -108,7 +116,7 @@ int main()
             cin >> col1;
             col1--;
 
-            cout << "\nSegunda peca\n";
+            cout << "\nSegunda numero\n";
             cout << "Linha: ";
             cin >> linha2;
             linha2--;
@@ -117,54 +125,55 @@ int main()
             cin >> col2;
             col2--;
 
-            if (linha1 < 0 || linha1 > 3 || linha2 < 0 || linha2 > 3 || col1 < 0 || col1 > 3 || col2 < 0 || col2 > 3) // Validação dos índices informados
+            if (linha1 < 0 || linha1 > 3 || linha2 < 0 || linha2 > 3 ||
+                col1 < 0 || col1 > 3 || col2 < 0 || col2 > 3)
             {
                 cout << "Valores Invalidos!\n";
                 system("pause");
                 system("cls");
-                continue;
             }
-            else if (matrizJogo[linha1][col1] != '?' || matrizJogo[linha2][col2] != '?') // Verifica se a posição já foi descoberta anteriormente
+            else if (matrizJogo[linha1][col1] != '?' || matrizJogo[linha2][col2] != '?')
             {
                 cout << "Posicao ja encontrada!\n";
                 system("pause");
                 system("cls");
-                continue;
             }
-            else if (linha1 == linha2 && col1 == col2) // Impede que o jogador escolha a mesma posição duas vezes
+            else if (linha1 == linha2 && col1 == col2)
             {
-                cout << "Escolhas posicoes diferentes!\n";
-                system("pause");
-                system("cls");
-                continue;
-            }
-
-            // Obtém os valores correspondentes às posições escolhidas
-            valor1 = matrizGabarito[linha1][col1];
-            valor2 = matrizGabarito[linha2][col2];
-
-            // Verifica se as peças escolhidas formam um par
-            if (valor1 == valor2)
-            {
-                cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
-                cout << "JOGADA OK" << "\n";
-                paresEncontrados++;
-                matrizJogo[linha1][col1] = valor1;
-                matrizJogo[linha2][col2] = valor2;
+                cout << "Escolha posicoes diferentes!\n";
                 system("pause");
                 system("cls");
             }
             else
             {
-                cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
-                cout << "JOGADA NOK" << "\n";
-                system("pause");
-                system("cls");
-            }
+                // Obtém os valores correspondentes às posições escolhidas
 
-            jogadasRealizadas++;
-            jogadasRestantes--;
-            cout << "\nJogadas realizadas: " << jogadasRealizadas << "\n";
+                valor1 = matrizGabarito[linha1][col1];
+                valor2 = matrizGabarito[linha2][col2];
+
+                // Verifica se as peças escolhidas formam um par
+                if (valor1 == valor2)
+                {
+                    cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
+                    cout << "JOGADA OK" << "\n";
+                    paresEncontrados++;
+                    matrizJogo[linha1][col1] = valor1;
+                    matrizJogo[linha2][col2] = valor2;
+                    system("pause");
+                    system("cls");
+                }
+                else
+                {
+                    cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
+                    cout << "JOGADA NOK" << "\n";
+                    system("pause");
+                    system("cls");
+                }
+
+                jogadasRealizadas++;
+                jogadasRestantes--;
+                cout << "\nJogadas realizadas: " << jogadasRealizadas << "\n";
+            }
         }
 
         if (paresEncontrados == 8)
