@@ -186,14 +186,13 @@ int main()
 
                 } while (col2 < 0 || col2 > 3);
 
-                if (matrizJogo[linha2][col2] != '?')
-                {
-                    cout << "Posicao ja encontrada!\n";
-                }
-
                 if (linha1 == linha2 && col1 == col2)
                 {
                     cout << "Escolha posicoes diferentes!\n";
+                }
+                else if (matrizJogo[linha2][col2] != '?')
+                {
+                    cout << "Posicao ja encontrada!\n";
                 }
 
             } while (matrizJogo[linha2][col2] != '?' || linha1 == linha2 && col1 == col2);
@@ -225,17 +224,17 @@ int main()
                 paresEncontrados++;
                 matrizJogo[linha1][col1] = valor1;
                 matrizJogo[linha2][col2] = valor2;
-                system("pause");
-                system("cls");
+                cin.ignore();
+                cout << "\033c";
             }
             else
             {
                 cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
                 cout << "JOGADA NOK" << "\n";
-                system("pause");
+                cin.ignore();
                 matrizJogo[linha1][col1] = '?';
                 matrizJogo[linha2][col2] = '?';
-                system("cls");
+                cout << "\033c";
             }
 
             jogadasRealizadas++;
