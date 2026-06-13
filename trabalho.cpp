@@ -6,22 +6,20 @@ int main()
 {
     char matrizPrincipal[4][4] = {'1', '4', '5', '2', '7', '2', '8', '7', '3', '6', '1', '4', '6', '5', '3', '8'};
     char matrizGabarito[4][4];
-    int numeroAleatorio;
-    int linha1, linha2, col1, col2;
-    char valor1, valor2;
-    char opc;
+    int numeroAleatorio, linha1, linha2, col1, col2;
+    char valor1, valor2, opc;
     bool jogo = true;
 
-    // Inicialização da semente para números aleatórios
+    // gerando números aleatórios
     srand(time(NULL));
 
-    // Laço principal do jogo
+    // laço principal do jogo
     while (jogo)
     {
-        // Sorteia uma das transformações da matriz
+        // sorteia uma das transformações da matriz
         numeroAleatorio = rand() % 4;
 
-        // Criação da matrizGabarito com base no número sorteado
+        // criação da matrizGabarito com base no número sorteado
         switch (numeroAleatorio)
         {
         case 0: // matriz original
@@ -73,20 +71,20 @@ int main()
             break;
         }
 
-        // Inicializa a matriz visível ao jogador com '?'
+        // inicializa a matriz visível ao jogador com '?'
         char matrizJogo[4][4];
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                matrizJogo[i][j] = '?';
+                matrizJogo[i][j] = 'X';
             }
         }
 
-        // Controle de pares encontrados e quantidade de jogadas
+        // controle de pares encontrados e quantidade de jogadas
         int paresEncontrados = 0, jogadasRealizadas = 0, jogadasRestantes = 24;
 
-        // Loop das jogadas do usuário
+        // loop das jogadas do usuário
         while (jogadasRestantes > 0 && paresEncontrados < 8)
         {
             cout << "\t1\t2\t3\t4\n";
@@ -104,7 +102,7 @@ int main()
                 cout << "\n";
             }
 
-            // Leitura das coordenadas escolhidas pelo jogador
+            // leitura das coordenadas escolhidas pelo jogador
             cout << "\nAdvinhe os numeros atraves da coordenadas";
             cout << "\nPrimeiro numero\n";
             do
@@ -117,7 +115,7 @@ int main()
 
                     if (linha1 < 0 || linha1 > 3)
                     {
-                        cout << "Valor invalido!\n";
+                        cout << "Valor invalido! Digite novamente...\n";
                     }
 
                 } while (linha1 < 0 || linha1 > 3);
@@ -130,17 +128,17 @@ int main()
 
                     if (col1 < 0 || col1 > 3)
                     {
-                        cout << "Valor invalido!\n";
+                        cout << "Valor invalido! Digite novamente...\n";
                     }
 
                 } while (col1 < 0 || col1 > 3);
 
-                if (matrizJogo[linha1][col1] != '?')
+                if (matrizJogo[linha1][col1] != 'X')
                 {
                     cout << "Posicao ja encontrada!\n";
                 }
 
-            } while (matrizJogo[linha1][col1] != '?');
+            } while (matrizJogo[linha1][col1] != 'X');
             matrizJogo[linha1][col1] = matrizGabarito[linha1][col1];
             cout << "\n\t1\t2\t3\t4\n";
             cout << "\t-\t-\t-\t-\n";
@@ -168,7 +166,7 @@ int main()
 
                     if (linha2 < 0 || linha2 > 3)
                     {
-                        cout << "Valor invalido!\n";
+                        cout << "Valor invalido! Digite novamente...\n";
                     }
 
                 } while (linha2 < 0 || linha2 > 3);
@@ -181,21 +179,22 @@ int main()
 
                     if (col2 < 0 || col2 > 3)
                     {
-                        cout << "Valor invalido!\n";
+                        cout << "Valor invalido! Digite novamente...\n";
                     }
 
                 } while (col2 < 0 || col2 > 3);
 
+                // impede que o jogador escolha a mesma posição duas vezes
                 if (linha1 == linha2 && col1 == col2)
                 {
                     cout << "Escolha posicoes diferentes!\n";
                 }
-                else if (matrizJogo[linha2][col2] != '?')
+                else if (matrizJogo[linha2][col2] != 'X')
                 {
                     cout << "Posicao ja encontrada!\n";
                 }
 
-            } while (matrizJogo[linha2][col2] != '?' || linha1 == linha2 && col1 == col2);
+            } while (matrizJogo[linha2][col2] != 'X' || linha1 == linha2 && col1 == col2);
             matrizJogo[linha2][col2] = matrizGabarito[linha2][col2];
             cout << "\n\t1\t2\t3\t4\n";
             cout << "\t-\t-\t-\t-\n";
@@ -212,29 +211,27 @@ int main()
                 cout << "\n";
             }
 
-            // Obtém os valores correspondentes às posições escolhidas
+            // obtém os valores correspondentes às posições escolhidas
             valor1 = matrizGabarito[linha1][col1];
             valor2 = matrizGabarito[linha2][col2];
 
-            // Verifica se as peças escolhidas formam um par
+            // verifica se as peças escolhidas formam um par
             if (valor1 == valor2)
             {
-                cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
                 cout << "JOGADA OK" << "\n";
                 paresEncontrados++;
                 matrizJogo[linha1][col1] = valor1;
                 matrizJogo[linha2][col2] = valor2;
-                cin.ignore();
-                cout << "\033c";
+                system("pause");
+                system("cls");
             }
             else
             {
-                cout << "Pecas escolhidas: " << valor1 << " e " << valor2 << "\n";
                 cout << "JOGADA NOK" << "\n";
-                cin.ignore();
+                system("pause");
                 matrizJogo[linha1][col1] = '?';
                 matrizJogo[linha2][col2] = '?';
-                cout << "\033c";
+                system("cls");
             }
 
             jogadasRealizadas++;
