@@ -71,7 +71,7 @@ int main()
             break;
         }
 
-        // inicializa a matriz visível ao jogador com '?'
+        // inicializa a matriz visível ao jogador com 'X'
         char matrizJogo[4][4];
         for (int i = 0; i < 4; i++)
         {
