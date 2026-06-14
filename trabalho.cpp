@@ -229,8 +229,8 @@ int main()
             {
                 cout << "JOGADA NOK" << "\n";
                 system("pause");
-                matrizJogo[linha1][col1] = '?';
-                matrizJogo[linha2][col2] = '?';
+                matrizJogo[linha1][col1] = 'X';
+                matrizJogo[linha2][col2] = 'X';
                 system("cls");
             }
 
